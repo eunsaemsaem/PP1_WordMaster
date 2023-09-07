@@ -1,7 +1,8 @@
 [과제] Project1. Java CRUD Application - 중간 진행보고
 
 # 단어추가 1
-<img width = 30 src="C:\Users\sweee\Desktop\ㅅㅍ1.png">
+<img width="208" alt="image" src="https://github.com/eunsaemsaem/PP_WordMaster/assets/142576710/87b93c86-0682-4c12-a698-6eda1ba66f09">
+
 
 # 모든 단어 보기 1
 <img src="https://github.com/eunsaemsaem/PP_WordMaster/assets/142576710/208d324c-a6e7-4d6f-a732-b87bf3a28114">
