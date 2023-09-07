@@ -1,7 +1,7 @@
 [과제] Project1. Java CRUD Application - 중간 진행보고
 
 # 단어추가 1
-<img src="https://github.com/eunsaemsaem/PP_WordMaster/assets/142576710/d4eb30bc-7eb4-44fc-b6e4-1b33706ea733">
+<img src="C:\Users\sweee\Desktop\ㅅㅍ1.png">
 
 # 모든 단어 보기 1
 <img src="https://github.com/eunsaemsaem/PP_WordMaster/assets/142576710/208d324c-a6e7-4d6f-a732-b87bf3a28114">
