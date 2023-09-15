@@ -47,7 +47,6 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
                 keylist.add(i);
                 j++;
             }
-
         }
         System.out.println("------------------------");
         return keylist;
@@ -56,18 +55,18 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
     public ArrayList<Integer> listAll(int levelNum) {
 
         ArrayList<java.lang.Integer> levellist = new ArrayList<>(); //새로운 list 생성
+        int j = 1;
 
         System.out.println("------------------------");
-        for (int i = 0; i < list.size(); i++) {
 
-            int j = 0;
+        for (int i = 0; i < list.size(); i++) {
             int levelN = list.get(i).getLevel();
 
             if (levelN != levelNum) { //단어가 keyword를 포함하지 않으면
                 continue;
             }
 
-            System.out.print((j + 1) + " ");
+            System.out.print(j + " ");
             System.out.println(list.get(i).toString());
 
             j++;
@@ -79,11 +78,11 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     @Override
     public Object add() {
-        System.out.println("=> 난이도(1,2,3) & 새 단어 입력 : ");
+        System.out.print ("=> 난이도(1,2,3) & 새 단어 입력 : ");
         int level = s.nextInt();
         String word = s.nextLine();
 
-        System.out.println("=> 뜻 입력 : ");
+        System.out.print ("=> 뜻 입력 : ");
         String meaning = s.nextLine();
 
         return new Word(0, level, word, meaning);
@@ -100,14 +99,11 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     @Override
     public int update(Object obj) {
-
-
-        return 0;
     }
 
     public void updateItem() {
 
-        System.out.println("=> 수정할 단어 검색 : ");
+        System.out.print ("=> 수정할 단어 검색 : ");
         String keyword = s.next();
 
         ArrayList<Integer> idlist = this.listAll(keyword);
@@ -128,22 +124,20 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     @Override
     public int delete(Object obj) {
-
-        return 0;
     }
 
     public void deleteItem() {
 
-        System.out.println("=> 삭제할 단어 검색 : ");
-        String keyword = s.nextLine();
+        System.out.print("=> 삭제할 단어 검색 : ");
+        String keyword = s.next();
 
         ArrayList<Integer> idlist = this.listAll(keyword);
 
-        System.out.println("=> 삭제할 번호 선택 : ");
+        System.out.print("=> 삭제할 번호 선택 : ");
         int num = s.nextInt();
         s.nextLine(); //enter
 
-        System.out.println("=> 정말로 삭제하시겠습니까? (Y/N");
+        System.out.print("=> 정말로 삭제하시겠습니까? (Y/N) : ");
         String ans = s.nextLine();
 
         if (ans.equals("Y") || ans.equals("y")) {
@@ -157,7 +151,6 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     @Override
     public void selectOne(int id) {
-
     }
 
     public void searchLevel() {
@@ -222,7 +215,7 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
             e.printStackTrace();
         }
 
-    }
+    }//saveFile
 
 
 }
