@@ -1,9 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -171,9 +168,10 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
     }
 
     public void loadFile() {
-        File fname = new File ("\"C:\\Users\\sweee\\Desktop\\pp_wordFile.txt\"");
+        File fname = new File ("C:\\Users\\sweee\\Desktop\\pp_wordFile.txt");
+
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fname));
+            BufferedReader br = new BufferedReader (new FileReader(fname));
             String line;
             int count = 0;
 
@@ -183,17 +181,20 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
                     break;
                 }
 
-                String data[] = line.split("\\|");
+                String data[] = line.split(",");
                 int level = Integer.parseInt(data[0]);
                 String word = data[1];
                 String meaning = data[2];
 
-                list.add(new Word(0, level, word, meaning));
+                list.add(new Word(count, level, word, meaning));
                 count++;
             }
             br.close();
+
             System.out.println("==>" + count + "개 로딩 완료");
-        } catch (IOException e) {
+        } catch (IOException e) { //파일 읽기 중 에러 발생
+            e.printStackTrace();
+        } catch (NullPointerException e) { //null이 있을 경우
             e.printStackTrace();
         }
     }//loadFile
