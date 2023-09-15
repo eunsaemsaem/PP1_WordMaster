@@ -15,27 +15,6 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         this.s = s;
     }
 
-    @Override
-    public Object add() {
-        System.out.println("=> 난이도(1,2,3) & 새 단어 입력 : ");
-        int level = s.nextInt();
-        String word = s.nextLine();
-
-        System.out.println("=> 뜻 입력 : ");
-        String meaning = s.nextLine();
-
-        return new Word(0, level, word, meaning);
-    }
-
-    public void addItem() {
-
-        Word one = (Word) add();
-        list.add(one);
-
-        System.out.println("새 단어가 단어장에 추가되었습니다.");
-
-    }
-
     public void listAll() {
 
         System.out.println("------------------------");
@@ -51,26 +30,27 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     public ArrayList<Integer> listAll(String keyword) {
 
-        ArrayList<Integer> idlist = new ArrayList<>(); //새로운 list 생성
+        ArrayList<Integer> keylist = new ArrayList<>(); //새로운 list 생성
+        int j = 1;
 
         System.out.println("------------------------");
-        for (int i = 0; i < list.size(); i++) {
 
-            int j = 0;
+        for (int i = 0; i < list.size(); i++) {
             String word = list.get(i).getWord();
 
-            if (!word.contains(keyword)) { //단어가 keyword를 포함하지 않으면
+            if (word.contains(keyword)) { //단어가 keyword를 포함하지 않으면
+                keylist.add(i); //i가 의미하는것은?? / i자리에 뭘 넣어야하는지??
+
+                System.out.print(j + " ");
+                System.out.println(list.get(i).toString());
+
+                j++;
+            } else {
                 continue;
             }
-
-            System.out.print((j + 1) + " ");
-            System.out.println(list.get(i).toString());
-
-            idlist.add(i);
-            j++;
         }
         System.out.println("------------------------");
-        return idlist;
+        return keylist;
     }
 
     public ArrayList<Integer> listAll(int levelNum) {
@@ -97,6 +77,28 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         return levellist;
     }
 
+
+    @Override
+    public Object add() {
+        System.out.println("=> 난이도(1,2,3) & 새 단어 입력 : ");
+        int level = s.nextInt();
+        String word = s.nextLine();
+
+        System.out.println("=> 뜻 입력 : ");
+        String meaning = s.nextLine();
+
+        return new Word(0, level, word, meaning);
+    }
+
+    public void addItem() {
+
+        Word one = (Word) add();
+        list.add(one);
+
+        System.out.println("새 단어가 단어장에 추가되었습니다.");
+
+    }
+
     @Override
     public int update(Object obj) {
 
@@ -108,18 +110,19 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
         System.out.println("=> 수정할 단어 검색 : ");
         String keyword = s.nextLine();
+        s.nextLine();
 
-        ArrayList<Integer> idlist = this.listAll(keyword); //?
+        ArrayList<Integer> idlist = this.listAll(keyword);
 
         System.out.println("=> 수정할 번호 선택 : ");
         int num = s.nextInt();
         s.nextLine(); //enter
 
         System.out.println("뜻 입력 : ");
-        String meaning = s.nextLine();
+        String remeaning = s.nextLine();
 
-        Word word = list.get(idlist.get(num - 1));
-        word.setMeaning(meaning);
+        Word reword = list.get(idlist.get(num-1));
+        reword.setMeaning(remeaning);
 
         System.out.println("단어가 수정되었습니다.");
 
@@ -167,6 +170,7 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         ArrayList<Integer> levelList = this.listAll(levelNum);
     }
 
+
     public void loadFile() {
         File fname = new File ("C:\\Users\\sweee\\Desktop\\pp_wordFile.txt");
 
@@ -191,7 +195,7 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
             }
             br.close();
 
-            System.out.println("==>" + count + "개 로딩 완료");
+            System.out.println("==> " + count + "개 로딩 완료");
         } catch (IOException e) { //파일 읽기 중 에러 발생
             e.printStackTrace();
         } catch (NullPointerException e) { //null이 있을 경우
