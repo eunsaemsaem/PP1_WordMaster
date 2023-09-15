@@ -99,6 +99,7 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     @Override
     public int update(Object obj) {
+        return 0;
     }
 
     public void updateItem() {
@@ -124,6 +125,7 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     @Override
     public int delete(Object obj) {
+        return 0;
     }
 
     public void deleteItem() {
