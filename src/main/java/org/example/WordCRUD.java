@@ -33,22 +33,21 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
     public ArrayList<Integer> listAll(String keyword) {
 
         ArrayList<Integer> keylist = new ArrayList<>(); //새로운 list 생성
-        int j = 0;
+        int j = 1;
 
         System.out.println("------------------------");
 
         for (int i = 0; i < list.size(); i++) {
             String word = list.get(i).getWord();
 
-            if (!word.contains(keyword)) { //단어가 keyword를 포함하지 않으면
-                continue;
+            if (word.contains(keyword)) {
+                System.out.print (j + " ");
+                System.out.println (list.get(i).toString());
+
+                keylist.add(i);
+                j++;
             }
 
-            System.out.print ((j+1) + " ");
-            System.out.println (list.get(i).toString());
-
-            keylist.add(i);
-            j++;
         }
         System.out.println("------------------------");
         return keylist;
@@ -166,6 +165,14 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         listAll(level);
     }
 
+    public void searchWord() {
+        System.out.println("=> 원하는 단어는? : ");
+
+        String keyword = s.nextLine();
+        s.nextLine();
+        listAll(keyword);
+    }
+
 
     public void loadFile() {
         try {
@@ -214,4 +221,6 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         }
 
     }
+
+
 }
