@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -29,7 +30,7 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         return new Word(0, level, word, meaning);
     }
 
-    public void addWord() {
+    public void addItem() {
 
         Word one = (Word) add();
         list.add(one);
@@ -75,8 +76,33 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         return idlist;
     }
 
+    public ArrayList<Integer> listAll(int levelNum) {
+
+        ArrayList<java.lang.Integer> levellist = new ArrayList<>(); //새로운 list 생성
+
+        System.out.println("------------------------");
+        for (int i = 0; i < list.size(); i++) {
+
+            int j = 0;
+            int levelN = list.get(i).getLevel();
+
+            if (!(levelN == levelNum)) { //단어가 keyword를 포함하지 않으면
+                continue;
+            }
+
+            System.out.print((j + 1) + " ");
+            System.out.println(list.get(i).toString());
+
+            levellist.add(i);
+            j++;
+        }
+        System.out.println("------------------------");
+        return levellist;
+    }
+
     @Override
     public int update(Object obj) {
+
 
         return 0;
     }
@@ -133,11 +159,19 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     @Override
     public void selectOne(int id) {
-    }
-}
 
-/*
+    }
+
+    public void selectOneItem (){
+
+        System.out.print ("=> 레벨 (1:초급, 2:중급, 3:고급) 선택 : ");
+        int levelNum = s.nextInt();
+
+        ArrayList<Integer> levelList = this.listAll(levelNum);
+    }
+
     public void loadFile() {
+        File fname = new File ("\"C:\\Users\\sweee\\Desktop\\pp_wordFile.txt\"");
         try {
             BufferedReader br = new BufferedReader(new FileReader(fname));
             String line;
@@ -149,12 +183,12 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
                     break;
                 }
 
-                String data[] = line.split ("\\|");
+                String data[] = line.split("\\|");
                 int level = Integer.parseInt(data[0]);
                 String word = data[1];
                 String meaning = data[2];
 
-                list.add(new Word (0, level,word,meaning));
+                list.add(new Word(0, level, word, meaning));
                 count++;
             }
             br.close();
@@ -162,5 +196,9 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }//loadFile
+
+    public void saveFile() {
+
     }
-*/
+}
