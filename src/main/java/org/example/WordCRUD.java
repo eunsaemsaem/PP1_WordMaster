@@ -9,6 +9,8 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     ArrayList<Word> list;
     Scanner s;
+    File fname = new File ("C:\\Users\\sweee\\Desktop\\pp_wordFile.txt"); //프로젝트 안으로 경로 옮기기 !
+
 
     WordCRUD(Scanner s) {
         list = new ArrayList<>();
@@ -31,23 +33,22 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
     public ArrayList<Integer> listAll(String keyword) {
 
         ArrayList<Integer> keylist = new ArrayList<>(); //새로운 list 생성
-        int j = 1;
+        int j = 0;
 
         System.out.println("------------------------");
 
         for (int i = 0; i < list.size(); i++) {
             String word = list.get(i).getWord();
 
-            if (word.contains(keyword)) { //단어가 keyword를 포함하지 않으면
-                keylist.add(i); //i가 의미하는것은?? / i자리에 뭘 넣어야하는지??
-
-                System.out.print(j + " ");
-                System.out.println(list.get(i).toString());
-
-                j++;
-            } else {
+            if (!word.contains(keyword)) { //단어가 keyword를 포함하지 않으면
                 continue;
             }
+
+            System.out.print ((j+1) + " ");
+            System.out.println (list.get(i).toString());
+
+            keylist.add(i);
+            j++;
         }
         System.out.println("------------------------");
         return keylist;
@@ -63,14 +64,13 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
             int j = 0;
             int levelN = list.get(i).getLevel();
 
-            if (!(levelN == levelNum)) { //단어가 keyword를 포함하지 않으면
+            if (levelN != levelNum) { //단어가 keyword를 포함하지 않으면
                 continue;
             }
 
             System.out.print((j + 1) + " ");
             System.out.println(list.get(i).toString());
 
-            levellist.add(i);
             j++;
         }
         System.out.println("------------------------");
@@ -114,18 +114,15 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
         ArrayList<Integer> idlist = this.listAll(keyword);
 
-        System.out.println("=> 수정할 번호 선택 : ");
-        int num = s.nextInt();
-        s.nextLine(); //enter
+        System.out.print ("=> 수정할 번호 선택 : ");
+        int id = s.nextInt();
 
-        System.out.println("뜻 입력 : ");
-        String remeaning = s.nextLine();
+        System.out.print ("=> 뜻 입력 : ");
+        String meaning = s.nextLine();
+        s.nextLine();
 
-        Word reword = list.get(idlist.get(num-1));
-        reword.setMeaning(remeaning);
-
-        System.out.println("단어가 수정되었습니다.");
-
+        Word word = list.get(idlist.get(id-1));
+        System.out.println ("단어가 수정되었습니다. ");
     }
 
     @Override
@@ -151,7 +148,7 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
         if (ans.equals("Y") || ans.equals("y")) {
             list.remove((int) idlist.get(num - 1));
             System.out.println("단어가 삭제되었습니다.");
-        } else if (ans.equals("N") || ans.equals("n")) {
+        } else {
             System.out.println("취소되었습니다.");
         }
 
@@ -162,18 +159,15 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
 
     }
 
-    public void selectOneItem (){
+    public void searchLevel() {
+        System.out.println("=> 원하는 레벨은? (1~3) : ");
 
-        System.out.print ("=> 레벨 (1:초급, 2:중급, 3:고급) 선택 : ");
-        int levelNum = s.nextInt();
-
-        ArrayList<Integer> levelList = this.listAll(levelNum);
+        int level = s.nextInt();
+        listAll(level);
     }
 
 
     public void loadFile() {
-        File fname = new File ("C:\\Users\\sweee\\Desktop\\pp_wordFile.txt");
-
         try {
             BufferedReader br = new BufferedReader (new FileReader(fname));
             String line;
@@ -204,6 +198,20 @@ public class WordCRUD implements ICRUD { //파일 작성 > 파일 로드 > 수�
     }//loadFile
 
     public void saveFile() {
+
+        try {
+            PrintWriter pr = new PrintWriter(new FileWriter(fname));
+
+            for (Word one : list) {
+                pr.write (one.toFileString() + "\n");
+            }
+
+            pr.close();
+            System.out.println ("==> 데이터 저장 완료 !!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

@@ -42,7 +42,7 @@ public class WordManager { //CRUD기능을 구현하는 전체적인 관리 역�
             if (menu == 1) {
                 wordCRUD.listAll();
             } else if (menu == 2) {
-                wordCRUD.selectOneItem();
+                wordCRUD.searchLevel();
             } else if (menu == 3) {
                 wordCRUD.listAll();
             } else if (menu == 4) {
