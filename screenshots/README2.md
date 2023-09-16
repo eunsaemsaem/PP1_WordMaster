@@ -3,7 +3,7 @@
 ### 
 
 #### 단어 수정
-<img width="200" alt="image" src=https://github.com/eunsaemsaem/PP_WordMaster/blob/master/screenshots/README2.md>
+<img width="200" alt="image" src="https://github.com/eunsaemsaem/PP_WordMaster/assets/142576710/44ab7cb4-47a6-4c1c-adb5-01da8415c887">
 
 
 #### 단어 삭제
