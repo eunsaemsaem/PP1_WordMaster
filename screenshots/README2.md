@@ -3,7 +3,7 @@
 ### 
 
 #### 단어 수정
-<img width="200" alt="image" src="C:\Users\sweee\Desktop\ㅅ1.png">
+<img width="200" alt="image" src=https://github.com/eunsaemsaem/PP_WordMaster/blob/master/screenshots/README2.md>
 
 
 #### 단어 삭제
